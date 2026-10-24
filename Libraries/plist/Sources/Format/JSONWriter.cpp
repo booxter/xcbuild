@@ -68,7 +68,8 @@ primitiveWriteEscapedString(std::string const &string)
         return false;
     }
 
-    for (char c : string) {
+    /* UTF-8 bytes above 0x7f are not control characters. */
+    for (unsigned char c : string) {
         if (c < 0x20) {
             char buf[64];
             int rc = snprintf(buf, sizeof(buf), "\\u%04x", c);

@@ -93,6 +93,9 @@ TEST(JSON, SerializeEscapedStrings)
         /* Quotes and backslashes must preserve the original string. */
         { "quote",     "a\"b",  R"("a\"b")", nullptr },
         { "backslash", "a\\b", R"("a\\b")", nullptr },
+
+        /* UTF-8 bytes must not be mistaken for control characters. */
+        { "UTF-8", u8"café ☃ 😀", R"("café ☃ 😀")", R"("caf\u00e9 \u2603 \ud83d\ude00")" },
     };
 
     auto document = [](std::string const &json) {
