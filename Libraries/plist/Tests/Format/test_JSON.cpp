@@ -89,6 +89,10 @@ TEST(JSON, SerializeEscapedStrings)
         { "form feed",       "a\fb", R"("a\fb")", R"("a\u000cb")" },
         { "NUL", std::string("a\0b", 3), R"("a\u0000b")", nullptr },
         { "unit separator",  "a\x1f" "b", R"("a\u001fb")", nullptr },
+
+        /* Quotes and backslashes must preserve the original string. */
+        { "quote",     "a\"b",  R"("a\"b")", nullptr },
+        { "backslash", "a\\b", R"("a\\b")", nullptr },
     };
 
     auto document = [](std::string const &json) {

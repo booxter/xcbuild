@@ -81,7 +81,7 @@ primitiveWriteEscapedString(std::string const &string)
         } else {
             switch (c) {
                 case '"':  if (!primitiveWriteString("\\\"")) { return false; } break;
-                case '\\': if (!primitiveWriteString("\\"))   { return false; } break;
+                case '\\': if (!primitiveWriteString("\\\\")) { return false; } break;
                 default: _contents.push_back(c); break;
             }
         }
